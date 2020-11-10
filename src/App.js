@@ -18,10 +18,12 @@ export default function App() {
       .then(res => {
         setShow(res.data);
         setSeasons(formatSeasons(res.data._embedded.episodes));
-    });
+      })
+      .catch(err => err)
   }, []);
 
   const handleSelect = e => {
+    console.log("HANLDED: ", e)
     setSelectedSeason(e.value);
   };
 
@@ -30,7 +32,7 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" data-testid="app">
       <img className="poster-img" src={show.image.original} alt={show.name} />
       <h1>{show.name}</h1>
       {parse(show.summary)}
